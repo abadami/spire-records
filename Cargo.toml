@@ -1,0 +1,3 @@
+[workspace]
+resolver = "3"
+members = ["spire-record-interpreter", "spire-record-keeper", "spire-record-ui"]
