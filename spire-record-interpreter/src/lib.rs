@@ -1,5 +1,22 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
+mod data;
+
+use std::path::Path;
+use data::Run;
+
+#[cfg(not(test))]
+use std::fs::read_to_string;
+
+#[cfg(test)]
+fn read_to_string(_: impl AsRef<Path>) -> std::io::Result<String> {
+    Ok(String::new())
+}
+
+pub fn read_run_file(file_path: &Path) -> std::io::Result<Run> {
+    let contents = read_to_string(file_path)?;
+
+    let run : Run = serde_json::from_str(&contents)?;
+
+    Ok(run)
 }
 
 #[cfg(test)]
@@ -8,7 +25,8 @@ mod tests {
 
     #[test]
     fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+        let result = read_run_file(Path::new("test"));
+
+        assert!(!result.is_ok());
     }
 }
