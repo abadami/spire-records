@@ -3,12 +3,24 @@ mod data;
 use std::path::Path;
 use data::Run;
 
-#[cfg(not(test))]
 use std::fs::read_to_string;
+use std::fs::read_dir;
 
-#[cfg(test)]
-fn read_to_string(_: impl AsRef<Path>) -> std::io::Result<String> {
-    Ok(String::new())
+pub fn read_runs_from_directory(directory_path: &Path) -> std::io::Result<Vec<Run>> {
+    let directory = read_dir(directory_path)?;
+    let mut runs = Vec::<Run>::new();
+
+    for directory_entry in directory {
+        let path = directory_entry?.path();
+
+        println!("Processing {}", path.display());
+
+        let run = read_run_file(path.as_path())?;
+
+        runs.push(run);
+    }
+
+    Ok(runs)
 }
 
 pub fn read_run_file(file_path: &Path) -> std::io::Result<Run> {
@@ -31,8 +43,8 @@ mod tests {
 
     #[test]
     fn it_works() {
-        let result = read_run_file(Path::new("test"));
+        let result = read_test_file();
 
-        assert!(!result.is_ok());
+        assert!(result.is_ok());
     }
 }

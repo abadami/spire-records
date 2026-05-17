@@ -46,7 +46,7 @@ pub struct PlayerStats {
     pub max_hp: u32,
     pub max_hp_gained: u32,
     pub max_hp_lost: u32,
-    pub player_id: u32
+    pub player_id: usize
 }
 
 #[derive(Serialize, Deserialize)]
@@ -86,7 +86,7 @@ pub struct Player {
     pub relics: Vec<LootItem>,
     pub potion: Option<Vec<LootItem>>,
     pub max_potion_slot_count: u32,
-    pub id: u32
+    pub id: usize
 }
 
 #[derive(Serialize, Deserialize)]
