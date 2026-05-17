@@ -90,6 +90,9 @@ version = "0.1.0"
 [[package]]
 name = "spire-record-ui"
 version = "0.1.0"
+dependencies = [
+ "spire-record-interpreter",
+]
 
 [[package]]
 name = "syn"

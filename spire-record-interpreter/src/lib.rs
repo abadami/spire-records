@@ -19,6 +19,12 @@ pub fn read_run_file(file_path: &Path) -> std::io::Result<Run> {
     Ok(run)
 }
 
+pub fn read_test_file() -> std::io::Result<Run> {
+    let contents = read_run_file(Path::new("spire-record-interpreter/test_files/1772846632.run"));
+
+    contents
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

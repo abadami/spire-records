@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-enum Acts {
+pub enum Acts {
     Overgrowth,
     Underdocks,
     Hive,
@@ -8,103 +8,103 @@ enum Acts {
 }
 
 #[derive(Serialize, Deserialize)]
-struct Card {
-    floor_added_to_deck: u32,
-    id: String
+pub struct Card {
+    pub floor_added_to_deck: Option<u32>,
+    pub id: String
 }
 
 #[derive(Serialize, Deserialize)]
-struct CardChoice {
-    card: Card,
-    was_picked: bool
+pub struct CardChoice {
+    pub card: Card,
+    pub was_picked: bool
 }
 
 #[derive(Serialize, Deserialize)]
-struct AncientTitle {
-    key: String,
-    table: String
+pub struct AncientTitle {
+    pub key: String,
+    pub table: String
 }
 
 #[derive(Serialize, Deserialize)]
-struct AncientChoice {
-    text_key: String,
-    title: AncientTitle,
-    was_chosen: bool
+pub struct AncientChoice {
+    pub text_key: String,
+    pub title: AncientTitle,
+    pub was_chosen: bool
 }
 
 #[derive(Serialize, Deserialize)]
-struct PlayerStats {
-    card_choices: Vec<CardChoice>,
-    ancient_choices: Vec<AncientChoice>,
-    current_gold: u32,
-    current_hp: u32,
-    damage_taken: u32,
-    gold_gained: u32,
-    gold_lost: u32,
-    gold_stolen: u32,
-    hp_healed: u32,
-    max_hp: u32,
-    max_hp_gained: u32,
-    max_hp_lost: u32,
-    player_id: u32
+pub struct PlayerStats {
+    pub card_choices: Option<Vec<CardChoice>>,
+    pub ancient_choices: Option<Vec<AncientChoice>>,
+    pub current_gold: u32,
+    pub current_hp: u32,
+    pub damage_taken: u32,
+    pub gold_gained: u32,
+    pub gold_lost: u32,
+    pub gold_stolen: u32,
+    pub hp_healed: u32,
+    pub max_hp: u32,
+    pub max_hp_gained: u32,
+    pub max_hp_lost: u32,
+    pub player_id: u32
 }
 
 #[derive(Serialize, Deserialize)]
-struct Room {
+pub struct Room {
     model_id: String,
-    room_type: String,
-    turns_taken: u32,
-    monster_ids: Option<Vec<String>>
+    pub room_type: String,
+    pub turns_taken: u32,
+    pub monster_ids: Option<Vec<String>>
 }
 
 #[derive(Serialize, Deserialize)]
-struct MapPoint {
-    map_point_type: String,
-    player_stats: Vec<PlayerStats>,
-    room: Vec<Room>,
+pub struct MapPoint {
+    pub map_point_type: String,
+    pub player_stats: Vec<PlayerStats>,
+    pub room: Option<Vec<Room>>,
 }
 
 #[derive(Serialize, Deserialize)]
-struct Badge {
-    id: String,
+pub struct Badge {
+    pub id: String,
     rarity: String,
 }
 
 #[derive(Serialize, Deserialize)]
-struct LootItem {
-    id: String,
-    floor_added_to_deck: u32,
-    current_upgrade_level: Option<u32>,
-    slot_index: Option<u32>,
+pub struct LootItem {
+    pub id: String,
+    pub floor_added_to_deck: u32,
+    pub current_upgrade_level: Option<u32>,
+    pub slot_index: Option<u32>,
 }
 
 #[derive(Serialize, Deserialize)]
-struct Player {
-    badge: Option<Vec<Badge>>,
-    character: String,
-    deck: Vec<LootItem>,
-    relics: Vec<LootItem>,
-    potion: Vec<LootItem>,
-    max_potion_slot_count: u32,
-    id: u32
+pub struct Player {
+    pub badge: Option<Vec<Badge>>,
+    pub character: String,
+    pub deck: Vec<LootItem>,
+    pub relics: Vec<LootItem>,
+    pub potion: Option<Vec<LootItem>>,
+    pub max_potion_slot_count: u32,
+    pub id: u32
 }
 
 #[derive(Serialize, Deserialize)]
 pub struct Run {
-    acts: Vec<String>,
-    ascension: u32,
+    pub acts: Vec<String>,
+    pub ascension: u32,
     build_id: String,
-    game_mod: String,
-    killed_by_encounter: String,
-    killed_by_event: String,
-    map_point_history: Vec<Vec<MapPoint>>,
-    modifiers: Vec<String>,
-    platform_type: String,
-    players: Vec<Player>,
-    run_time: u32,
-    schema_version: u32,
-    seed: String,
-    start_time: u32,
-    was_abandoned: bool,
-    win: bool
+    pub game_mod: Option<String>,
+    pub killed_by_encounter: String,
+    pub killed_by_event: String,
+    pub map_point_history: Vec<Vec<MapPoint>>,
+    pub modifiers: Vec<String>,
+    pub platform_type: String,
+    pub players: Vec<Player>,
+    pub run_time: u32,
+    pub schema_version: u32,
+    pub seed: String,
+    pub start_time: u32,
+    pub was_abandoned: bool,
+    pub win: bool
 }
